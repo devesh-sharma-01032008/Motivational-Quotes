@@ -16,7 +16,7 @@ const loadQuote = async (url) => {
 
 const addMoreQuotes = async () => {
   const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
-  if (scrollTop + clientHeight >= scrollHeight-500) {
+  if (scrollTop + clientHeight >= scrollHeight-100) {
     for (let i = 0; i < 10; i++) {
       loadQuote(url);
     }
