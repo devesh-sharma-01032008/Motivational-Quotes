@@ -2,18 +2,43 @@ const loadQuote = async (url) => {
   const response = await fetch(url);
   const data = await response.json();
   let quote = document.querySelector("div.quote")
-  quote.innerHTML += `
-    <div class="container">
-        <div class="speech">
-          ${data.content}
-        </div>
-        <div class="author">
-           ${data.author}
-        </div>
-     </div>
-  `;
-}
+  if (data.content && data.author) {
+    quote.innerHTML += `
+        <div class="container" onclick="copyQuote(this)">
+            <div class="speech">
+              ${data.content}
+            </div>
+            <div class="author">
+               ${data.author}
+            </div>
+         </div>
+      `;
+  } else {
+    quote.innerHTML = `
+    <h2 style="text-align:center">
+      No such Author or Query Found. Sorry Try Again.
+    </h2>
+          `;
+  }
 
+}
+const copyQuote = (element) => {
+  let quoesContainer = element.children;
+  let quote = quoesContainer[0].innerText;
+  let author = quoesContainer[1].innerText;
+  let text = `Quote : ${quote}
+
+Speaker/Author : ${author}
+  `;
+  navigator.clipboard.writeText(text);
+  let toast = document.getElementById("toast");
+  toast.style.color = "white";
+  toast.style.background = "black"
+  setTimeout(() => {
+    toast.style.color = "transparent";
+    toast.style.background = "transparent";
+  }, 500);
+}
 const addMoreQuotes = async () => {
   const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
   if (scrollTop + clientHeight >= scrollHeight - 100) {
@@ -46,7 +71,6 @@ window.addEventListener("load", () => {
 })
 
 searchAuthor.addEventListener("blur", () => {
-  console.log("Done");
   let author = searchAuthor.value;
   if (author) {
     url = `https://api.quotable.io/random?author=${author}`;

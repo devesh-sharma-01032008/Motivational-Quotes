@@ -70,6 +70,10 @@ nav ul li a:hover {
   margin: auto;
 }
 
+.quote:nth-child(1) {
+  padding: 100px 0px;
+}
+
 .container {
   display: flex;
   width: 80%;
@@ -106,6 +110,19 @@ input {
   border-radius: 10px;
   outline: none;
   border: none;
+}
+
+#toast {
+  padding: 10px;
+  font-size: 1.4rem;
+  border-radius: 10px;
+  transition: all 0.5s;
+  background: transparent;
+  color: transparent;
+  position: fixed;
+  top: 80vh;
+  left: 50vw;
+  transform: translate(-50%);
 }
 
 @media only screen and (max-width:480px) {
@@ -172,10 +189,6 @@ input {
   nav ul li a:hover {
     background: var(--light-yellow);
     color: black;
-  }
-
-  .quote:nth-child(1) {
-    padding: 100px 0px;
   }
 
   .author {
