@@ -70,14 +70,16 @@ window.addEventListener("load", () => {
   }
 })
 
-searchAuthor.addEventListener("blur", () => {
-  let author = searchAuthor.value;
-  if (author) {
-    url = `https://api.quotable.io/random?author=${author}`;
-    let quote = document.querySelector("div.quote")
-    quote.innerHTML = "";
-    for (let i = 0; i < 10; i++) {
-      loadQuote(url);
+searchAuthor.addEventListener("keypress", (e) => {
+  if (e.key === 'Enter') {
+    let author = searchAuthor.value;
+    if (author) {
+      url = `https://api.quotable.io/random?author=${author}`;
+      let quote = document.querySelector("div.quote")
+      quote.innerHTML = "";
+      for (let i = 0; i < 10; i++) {
+        loadQuote(url);
+      }
     }
   }
 })
