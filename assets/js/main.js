@@ -1,7 +1,8 @@
 const loadQuote = async (url) => {
-  const response = await fetch(url);
-  const data = await response.json();
   let quote = document.querySelector("div.quote")
+  const response = await fetch(url);
+  quote.removeChild(quote.childNodes[0])
+  const data = await response.json();
   if (data.content && data.author) {
     quote.innerHTML += `
         <div class="container" onclick="copyQuote(this)">
